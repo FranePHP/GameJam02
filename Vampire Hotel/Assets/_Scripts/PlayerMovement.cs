@@ -4,22 +4,42 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    CharacterController cc;
     [SerializeField] TouchJoystick joystick;
+    CharacterController cc;
     [SerializeField] float speed;
+    Vector3 dir = Vector3.zero;
+
+    [Header("Model")]
+    [SerializeField] GameObject model;
+    [SerializeField] float rotSpeed = 600f;
+    Quaternion rot;
+
+    //[Header("Animations")]
 
     private void Start()
     {
         cc = GetComponent<CharacterController>();
+        rot = Quaternion.LookRotation(dir);
     }
 
     private void Update()
     {
         
-        float x = joystick.inputVector.x;
-        float z = joystick.inputVector.y;
+        dir.x = joystick.inputVector.x;
+        dir.z = joystick.inputVector.y;
 
-        Vector3 move = transform.right * x + transform.forward * z;
+        Vector3 move = transform.right * dir.x + transform.forward * dir.z;
+
+        if (dir != Vector3.zero)
+        {
+            rot = Quaternion.LookRotation(dir);
+        }
+        else
+        {
+            rot = model.transform.rotation;
+        }
+
+        model.transform.rotation = Quaternion.RotateTowards(model.transform.rotation, rot, rotSpeed * Time.deltaTime);
 
         cc.Move(move * speed * Time.deltaTime);
     }
