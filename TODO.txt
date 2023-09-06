@@ -1,0 +1,26 @@
+- Voditi računa o poziciji playera ovisno o prostoriji (triggeri) za spawnanje enemyja te samo aktivirati flashlight triggere na enemyjima koji su u istoj prostoriji kao player
+- animacije (vidi survival clicker)
+- ćućanje (sphere collider na enemyju)
+- UI & HUD
+- Postprocessing na fastmodeu (ako bude dovoljno lijep)
+
+Opcije za enemyje:
+- Koliko ih je trenutno u sobi: 3 po maloj prostoriji (5 velikoj)
+- Koliko brzo se rotiraju (od sporijeg do bržeg) - ili su statični
+- Mogu li gledati prema tebi ili se samo rotiraju oko svoje osi
+- Stoje li na mjestu ili se kreću po sobi (npr. naprijed nazad) - ako trebaju hvatati playera, može navmesh agent ali samo low settings
+
+Lv1 static
+Lv2 povećana količina
+Lv3 normalna količina, ali počinju se rotirati oko svoje osi
+Lv4 povećana količina
+Lv5 normalna količina, ali se duplo brže vrte
+Lv6 povećana količina i duplo se brže vrte
+
+količina = 1 po prostoriji;
+rotacija = 0;
+količina++
+rotacija++
+količina++
+rotacija++
+...
