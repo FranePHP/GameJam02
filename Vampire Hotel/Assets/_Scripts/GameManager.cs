@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public float health = 100f;
     public bool isSucking = false;
     [SerializeField] Slider healthSlider;
+    public PlayAnimation playerAnimation;
     [SerializeField] Transform player;
     [SerializeField] PlayerMovement pm;
     public bool gameOver;
@@ -36,6 +37,13 @@ public class GameManager : MonoBehaviour
         {
             health -= Time.deltaTime;
             UpdateHealthSlider();
+
+            if (health <= 0)
+            {
+                playerAnimation.Fall_Flat();
+                gameOver = true;
+                Debug.Log("Game Over");
+            }
         }
 
         //Debug.Log("Player is currently in room number " + pm.room + " (Hallway is 0)");

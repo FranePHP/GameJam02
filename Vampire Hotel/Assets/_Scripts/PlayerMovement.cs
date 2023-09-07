@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] TouchJoystick joystick;
+    [SerializeField] PlayAnimation playAnimation;
     CharacterController cc;
     [SerializeField] float speed;
     Vector3 dir = Vector3.zero;
@@ -43,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
         model.transform.rotation = Quaternion.RotateTowards(model.transform.rotation, rot, rotSpeed * Time.deltaTime);
 
         cc.Move(move * speed * Time.deltaTime);
+
+        playAnimation.SetWalking(move.sqrMagnitude > 0.001f);
     }
 
     /*private void OnTriggerEnter(Collider other)
