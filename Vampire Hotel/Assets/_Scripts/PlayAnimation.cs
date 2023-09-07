@@ -6,7 +6,7 @@ public class PlayAnimation : MonoBehaviour
 {
     [SerializeField] private Animator animator;
 
-    public bool isPlayerWalkAnim = true;
+    public bool isPlayerWalkAnim = false;
     public bool isFall_Flat = false;
     public bool isZombie_Neck_bite = false;
 
@@ -16,13 +16,24 @@ public class PlayAnimation : MonoBehaviour
     {
         animator.SetBool("PlayerWalkAnim", onOff);
     }
+    public void SetBiting()
+    {
+        animator.SetTrigger("BiteMyAss"); ;
+    } 
+    public void SetFallFlat()
+    {
+        animator.SetTrigger("IDieded");
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {            
-            isPlayerWalkAnim = false;
-            isZombie_Neck_bite = true;
+            //isPlayerWalkAnim = false;
+            //isZombie_Neck_bite = true;
+            //SetWalking();
+            SetBiting();
+            Debug.Log(isZombie_Neck_bite);
            
             StartCoroutine(ResetPlayerWalkAnim());
         }
@@ -32,15 +43,17 @@ public class PlayAnimation : MonoBehaviour
     {       
         yield return new WaitForSeconds(1f);
 
-        isZombie_Neck_bite = false;
-        isPlayerWalkAnim = true;        
+        //isZombie_Neck_bite = false;
+       // isPlayerWalkAnim = true;
+        //SetBiting();
+        //SetWalking(true);
     }
 
     public void Fall_Flat()
     {
         if (gm.health <= 0)
         {
-            isFall_Flat = true;
+            SetFallFlat();
             Application.Quit();
         }
     }
