@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     CharacterController cc;
     [SerializeField] float speed;
     Vector3 dir = Vector3.zero;
-    public int room = 0;
+    //public int room = 0;
 
     [Header("Model")]
     [SerializeField] GameObject model;
@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
         cc.Move(move * speed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         for (int i = 0; i <= 8; i++)
         {
@@ -54,5 +54,5 @@ public class PlayerMovement : MonoBehaviour
                 room = i;
             }
         }
-    }
+    }*/
 }
