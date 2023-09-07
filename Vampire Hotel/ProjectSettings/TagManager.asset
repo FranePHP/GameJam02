@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Room0
+  - Room1
+  - Room2
+  - Room3
+  - Room4
+  - Room5
+  - Room6
+  - Room7
+  - Room8
+  - Enemy
   layers:
   - Default
   - TransparentFX

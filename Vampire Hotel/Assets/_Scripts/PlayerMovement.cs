@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     CharacterController cc;
     [SerializeField] float speed;
     Vector3 dir = Vector3.zero;
+    public int room = 0;
 
     [Header("Model")]
     [SerializeField] GameObject model;
@@ -42,5 +43,16 @@ public class PlayerMovement : MonoBehaviour
         model.transform.rotation = Quaternion.RotateTowards(model.transform.rotation, rot, rotSpeed * Time.deltaTime);
 
         cc.Move(move * speed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        for (int i = 0; i <= 8; i++)
+        {
+            if (other.CompareTag("Room" + i))
+            {
+                room = i;
+            }
+        }
     }
 }
