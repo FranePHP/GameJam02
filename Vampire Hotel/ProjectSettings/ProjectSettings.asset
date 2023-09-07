@@ -250,7 +250,7 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/Pismo/Fabjan/VampireKeystore/vampirehotel.keystore
+  AndroidKeystoreName: E:/2023-9-6 - DRUGI GAME JAM/vampirehotel.keystore
   AndroidKeyaliasName: vampirehotel
   AndroidEnableArmv9SecurityFeatures: 0
   AndroidBuildApkPerCpuArchitecture: 0
@@ -759,8 +759,8 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Vampire Hotel
-  metroPackageVersion: 
+  metroPackageName: VampireHotel
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -768,7 +768,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: Vampire Hotel
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: Vampire Hotel
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0
