@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public float health = 100f;
     public bool isSucking = false;
+    public Slider healthSlider; 
 
     private void Start()
     {
@@ -18,6 +20,18 @@ public class GameManager : MonoBehaviour
         if (!isSucking)
         {
             health -= Time.deltaTime;
+            UpdateHealthSlider(); 
+        }
+    }
+
+    
+    void UpdateHealthSlider()
+    {
+        if (healthSlider != null)
+        {
+            healthSlider.value = health; 
         }
     }
 }
+
+
