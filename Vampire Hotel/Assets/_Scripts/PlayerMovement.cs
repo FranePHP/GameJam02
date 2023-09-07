@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed;
     Vector3 dir = Vector3.zero;
     //public int room = 0;
+    public bool canSuck = true;
 
     [Header("Model")]
     [SerializeField] GameObject model;
@@ -22,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     {
         cc = GetComponent<CharacterController>();
         rot = Quaternion.LookRotation(dir);
+        canSuck = true;
     }
 
     private void Update()

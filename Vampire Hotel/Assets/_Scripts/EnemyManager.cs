@@ -13,6 +13,7 @@ public class EnemyManager : MonoBehaviour
     {
         gm = FindObjectOfType<GameManager>();
         //playerPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position;
+        ManageDifficulty();
         StartSpawnCoroutine();
     }
 
@@ -72,8 +73,12 @@ public class EnemyManager : MonoBehaviour
         Debug.Log("Coroutine done");
     }
 
-    void ManageDifficulty()
+    public void ManageDifficulty()
     {
-        // ovisno o scoreu/levelu setiraj spawnTime, rotSpeed (za EnemyChild), enemyLimitGlobal (u GameManageru), enemyLimitLocal (u GameManageru)
+        // ovisno o levelu setiraj spawnTime, rotSpeed (za EnemyChild), enemyLimitGlobal (u GameManageru), enemyLimitLocal (u GameManageru)
+        spawnTime = 5;
+        enemyChild.rotSpeed = gm.level * 10;
+        gm.enemyLimitGlobal = 33;
+        gm.enemyLimitLocal = Mathf.CeilToInt(gm.level / 5f);
     }
 }

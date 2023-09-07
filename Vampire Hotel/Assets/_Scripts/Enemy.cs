@@ -6,18 +6,28 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] EnemyManager manager;
     [SerializeField] Light flashlight;
+    PlayerMovement pm;
+    GameManager gm;
     public float rotSpeed = 15f;
     float hp = 1f;
     float flashlightRangeMax = 8;
+    bool detected = false;
 
     private void Start()
     {
+        detected = false;
         flashlightRangeMax = 8;
+        transform.Rotate(0, Random.Range(1, 11) * 36f, 0);
+        gm = FindObjectOfType<GameManager>();
+        pm = FindObjectOfType<PlayerMovement>();
     }
 
     private void Update()
     {
-        transform.Rotate(0, rotSpeed * Time.deltaTime, 0);
+        if (!detected)
+        {
+            transform.Rotate(0, rotSpeed * Time.deltaTime, 0);
+        }
 
         // "Animacija" pojavljivanja neprijatelja scale-anjem od 0 do 1
         if (transform.localScale.x < 1)
@@ -45,20 +55,32 @@ public class Enemy : MonoBehaviour
     {
         hp = 1f;
         transform.localScale = Vector3.zero;
+        transform.Rotate(0, Random.Range(1, 11) * 36f, 0);
         flashlight.range = 0;
+        detected = false;
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            hp -= Time.deltaTime;
+            detected = true;
 
-            if (hp <= 0)
+            if (pm.canSuck)
             {
-                manager.StartSpawnCoroutine();
-                gameObject.SetActive(false);
+                hp -= Time.deltaTime;
+
+                if (hp <= 0)
+                {
+                    manager.StartSpawnCoroutine();
+                    gm.AddScore(10);
+                    gameObject.SetActive(false);
+                }
             }
+        }
+        else
+        {
+            detected = false;
         }
     }
 }

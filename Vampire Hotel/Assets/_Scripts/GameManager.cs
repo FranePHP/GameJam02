@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Smanjiti prije builda")]
+    [SerializeField] float levelupScale = 1f; // postotak
+    
     [Header("Player")]
-    public float health = 100f;
+    public float health = 60f;
     public bool isSucking = false;
-    [SerializeField] Slider healthSlider;
     public PlayAnimation playerAnimation;
     [SerializeField] Transform player;
     [SerializeField] PlayerMovement pm;
     public bool gameOver;
+    public bool jesam;
 
     [Header("Score")]
     public int score = 0;
@@ -22,13 +26,25 @@ public class GameManager : MonoBehaviour
     //[SerializeField] float spawnTime = 5f;
     public int enemyLimitGlobal = 5; // koliko odjednom smije biti enemyja (sve skupa)
     public int enemyLimitLocal = 1; // koliko odjednom u blizini (otprilike po prostoriji) smije biti neprijatelja
+    [SerializeField] EnemyManager[] enemies; // koristeno samo za referenciranje enemymanagera prilikom levelupa 
+
+    [Header("UI")]
+    //[SerializeField] Slider healthSlider;
+    [SerializeField] Image healthBarBackground;
+    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI levelText;
 
     private void Start()
     {
-        health = 100f;
+        health = 60f;
+        score = 0;
+        level = 0;
         isSucking = false;
         score = 0;
         gameOver = false;
+        UpdateHealthSlider();
+        UpdateScoreText();
+        UpdateLevelText();
     }
 
     private void Update()
@@ -40,26 +56,63 @@ public class GameManager : MonoBehaviour
 
             if (health <= 0)
             {
-                playerAnimation.Fall_Flat();
                 gameOver = true;
                 Debug.Log("Game Over");
             }
         }
 
-        //Debug.Log("Player is currently in room number " + pm.room + " (Hallway is 0)");
+        if (gameOver && !jesam)
+        {
+            GameOver();
+            jesam = true;
+        }
     }
     
     void UpdateHealthSlider()
     {
-        if (healthSlider != null)
+        if (healthBarBackground != null)
         {
-            healthSlider.value = health; 
+            if (health <= 100f)
+            {
+                healthBarBackground.fillAmount = health / 100f;
+                healthBarBackground.color = Color.red;
+            }
         }
+    }
+
+    void UpdateScoreText()
+    {
+        scoreText.text = score.ToString();
+    }
+    void UpdateLevelText()
+    {
+        levelText.text = level.ToString();
     }
 
     void GameOver()
     {
-        StopAllCoroutines();
+        playerAnimation.Fall_Flat();
+    }
+
+    public void AddScore(float amount)
+    {
+        health += 10;
+        UpdateHealthSlider();
+        score += 10;
+        UpdateScoreText();
+
+        if (score >= (((level + 1)*(level + 1)) * 100 * levelupScale)) // formula za levelupanje: tijekom levela 0 -> 100; tijekom levela 1 -> 400; tijekom levela 2 -> 900
+        {
+            level++;
+            UpdateLevelText();
+
+            for (int i = 0; i < enemies.Length; i++) // updateamo odmah difficulty
+            {
+                enemies[i].ManageDifficulty();
+            }
+
+            Debug.Log("TODO levelup ui popup");
+        }
     }
 }
 
