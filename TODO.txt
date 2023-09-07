@@ -1,9 +1,10 @@
-- Voditi računa o poziciji playera ovisno o prostoriji (triggeri) za spawnanje enemyja
-- samo aktivirati flashlight triggere na enemyjima koji su u istoj prostoriji kao player
-- animacije (vidi survival clicker)
-- ćućanje (sphere collider na enemyju)
-- UI & HUD
-- Postprocessing na fastmodeu (ako bude dovoljno lijep)
+FB - Voditi računa o poziciji playera ovisno o prostoriji (triggeri) za spawnanje enemyja
+FB - samo aktivirati flashlight triggere na enemyjima koji su u istoj prostoriji kao player
+FF - animacije (vidi survival clicker)
+FF - ćućanje (sphere collider na enemyju)
+FF - UI & HUD kostur tj kod
+FB - UI & HUD vizualni polish
+FB & FF - Postprocessing na fastmodeu (ako bude dovoljno lijep)
 
 Opcije za enemyje:
 - Koliko ih je trenutno u sobi: 3 po maloj prostoriji (5 velikoj)
@@ -25,3 +26,6 @@ rotacija++
 količina++
 rotacija++
 ...
+
+  1	2     3
+[***] [***] [123]
