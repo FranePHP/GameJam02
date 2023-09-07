@@ -1,4 +1,5 @@
-- Voditi računa o poziciji playera ovisno o prostoriji (triggeri) za spawnanje enemyja te samo aktivirati flashlight triggere na enemyjima koji su u istoj prostoriji kao player
+- Voditi računa o poziciji playera ovisno o prostoriji (triggeri) za spawnanje enemyja
+- samo aktivirati flashlight triggere na enemyjima koji su u istoj prostoriji kao player
 - animacije (vidi survival clicker)
 - ćućanje (sphere collider na enemyju)
 - UI & HUD
